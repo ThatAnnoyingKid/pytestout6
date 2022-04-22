@@ -53,6 +53,8 @@ for product in classes_response.get_activated_products():
     
     all_sections = outline.get_all_sections()
     
+    chapter = input("What chapter do you want to use? \n")
+
     for section in all_sections:
         resources = section.get_resources()
         for resource in resources:
@@ -60,10 +62,12 @@ for product in classes_response.get_activated_products():
             
             if resource_map_entry is not None and (resource_map_entry.is_sim() or resource_map_entry.is_exam()):
                 resource_id = resource_map_entry.get_resource_id()
-                print(resource.get_index())
                 
+                if resource.get_index().split(".")[0] == chapter:
+                    print(resource.get_index())
+                    
                 if resource.get_index() != " ":
-                   continue
+                   continue 
                 
                 sys.exit()
                 print("hacking " + resource.get_index())
