@@ -4,6 +4,38 @@ import random
 import time
 from tqdm import tqdm
 
+def complete_quiz(client, user_id, default_version_id, resource_id):
+    create_exam_response = client.create_exam(
+        user_id, 
+        default_version_id,
+        resource_id
+    )
+    exam_session_id = create_exam_response.get_exam_session_id()
+    exam_time = random.randrange(127, 250)
+
+    submit_result_request = pytestout6.SubmitResultRequest(
+        user_profile_id = user_id,
+        resource_id = resource_id,
+        resource_type = 4,
+        resource_sub_type = 4,
+        group_id = default_version_id,
+        points_scored = random.randrange(8, 10 + 1),
+        points_possible = 10,
+        passed = True,
+        seconds_in_resource = exam_time,
+        response_details = exam_session_id,
+        exam_session_id = exam_session_id,
+    )
+
+    print("Sleeping for " + str(exam_time))
+    for i in tqdm(range(exam_time)):
+        time.sleep(1)
+                    
+    submit_result_response = client.submit_result(
+        user_id,
+        submit_result_request,
+    )
+
 # Input
 username = input("Enter Username: ")
 password = input("Enter Password: ")
@@ -53,61 +85,33 @@ for product in classes_response.get_activated_products():
     
     all_sections = outline.get_all_sections()
     
+    
     chapter = input("What chapter do you want to use? \n")
-
+    labs = int(input("How many labs do you want to do? \n"))
+    quiz = int(input("How many quizes do you want to do? \n"))
+    quizCount = 0
+    labCount = 0
+    
+    assments = []
     for section in all_sections:
         resources = section.get_resources()
         for resource in resources:
             resource_map_entry = resource_map.get(resource.get_href())
             
             if resource_map_entry is not None and (resource_map_entry.is_sim() or resource_map_entry.is_exam()):
-                resource_id = resource_map_entry.get_resource_id()
+                assments.append((resource, resource_map_entry))
                 
-                if resource.get_index().split(".")[0] == chapter:
-                    print(resource.get_index())
-                    
-                if resource.get_index() != " ":
-                   continue 
-                
-                sys.exit()
-                print("hacking " + resource.get_index())
-                exam_attempts = client.get_exam_attempts(user_id, resource_id)
-                
-                passed = False
-                for attempt in exam_attempts:
-                    if attempt.is_passed():
-                        passed = True
-                
-                #if not passed:
-                if True:
-                    create_exam_response = client.create_exam(
-                        user_id, 
-                        default_version_id,
-                        resource_id
-                    )
-                    
-                    exam_session_id = create_exam_response.get_exam_session_id()
-                    exam_time = random.randrange(127, 250)
-                    
-                    submit_result_request = pytestout6.SubmitResultRequest(
-                        user_profile_id = user_id,
-                        resource_id = resource_id,
-                        resource_type = 4,
-                        resource_sub_type = 4,
-                        group_id = default_version_id,
-                        points_scored = random.randrange(8, 10 + 1),
-                        points_possible = 10,
-                        passed = True,
-                        seconds_in_resource = exam_time,
-                        response_details = exam_session_id,
-                        exam_session_id = exam_session_id,
-                    )
-                    
-                    print("Sleeping for " + str(exam_time))
-                    for i in tqdm(range(exam_time)):
-                        time.sleep(1)
-                    
-                    submit_result_response = client.submit_result(
-                        user_id,
-                        submit_result_request,
-                    )
+    for (resource, resource_map_entry) in assments:
+        
+        resource_id = resource_map_entry.get_resource_id()
+        if resource.get_index().split(".")[0] == chapter and resource_map_entry.is_sim() and labCount < labs:
+            complete_quiz(client, user_id, default_version_id, resource_id)
+            labCount += 1
+    
+    for (resource, resource_map_entry) in assments:
+        
+        resource_id = resource_map_entry.get_resource_id()
+        if resource.get_index().split(".")[0] == chapter and resource_map_entry.is_exam() and quizCount < quiz:
+            complete_quiz(client, user_id, default_version_id, resource_id)            
+            quizCount += 1
+            
