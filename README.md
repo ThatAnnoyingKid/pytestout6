@@ -4,7 +4,7 @@
 A current prototype for botting Testout
 
 # How to install tqdm
-Open powershell and run "pip install "git+https://github.com/tqdm/tqdm.git@devel#egg=tqdm""
+Open powershell and run "pip install tqdm"
 
 # How to Run
 Open powershell in the same directory of these files and simply run "python3 pytestout6_demo.py"
