@@ -8,4 +8,11 @@ Open powershell and run "pip install tqdm"
 
 # How to Run
 Open powershell in the same directory of these files and simply run "python3 pytestout6_demo.py"
-There is a current problem where labs take just as long as exams, this problem should be fixed soon.
+
+# Current problems
+I am working on fixing these problems:
+
+- Having the program tell you what assignment it is working on
+- Fix the RNG for score so it is not always 100%
+
+Please let me know if you find any other problems.
