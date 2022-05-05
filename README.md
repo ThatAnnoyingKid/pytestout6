@@ -14,5 +14,6 @@ I am working on fixing these problems:
 
 - Having the program tell you what assignment it is working on
 - Fix the RNG for score so it is not always 100%
+- Allow users start from any specific part
 
 Please let me know if you find any other problems.
