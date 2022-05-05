@@ -4,6 +4,14 @@ import random
 import time
 from tqdm import tqdm
 
+def complete_lab(client, user_id, default_version_id, resource_id):
+    create_exam_response = client.create_exam(
+        user_id, 
+        default_version_id,
+    )
+    exam_session_id = create_exam_response.get_exam_session_id()
+    exam_time = random.randrange(300, 600)
+    
 def complete_quiz(client, user_id, default_version_id, resource_id):
     create_exam_response = client.create_exam(
         user_id, 
