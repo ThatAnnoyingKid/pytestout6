@@ -9,6 +9,7 @@ def complete_lab(client, user_id, default_version_id, resource_id):
         user_id, 
         default_version_id,
     )
+    print(resource.get_index())
     exam_session_id = create_exam_response.get_exam_session_id()
     exam_time = random.randrange(300, 600)
     
@@ -18,6 +19,7 @@ def complete_quiz(client, user_id, default_version_id, resource_id):
         default_version_id,
         resource_id
     )
+    print(resource.get_index())    
     exam_session_id = create_exam_response.get_exam_session_id()
     exam_time = random.randrange(127, 250)
 
@@ -93,7 +95,11 @@ for product in classes_response.get_activated_products():
     
     all_sections = outline.get_all_sections()
     
-    
+    assignment = input("Do you want to do a specific assignment or a chapter? \n A. Specific assignment \n B. Chapter  \n")
+    if assignment.string.lower() == "a":
+        userExam = input("What assignment would you like to do \n ")
+        is_lab = input("Is this a lab or exam? \n A. Lab \n B. Exam \n ") # I would like it to detect if lab or quiz by itself
+        
     chapter = input("What chapter do you want to use? \n")
     labs = int(input("How many labs do you want to do? \n"))
     quiz = int(input("How many quizes do you want to do? \n"))
@@ -113,7 +119,7 @@ for product in classes_response.get_activated_products():
         
         resource_id = resource_map_entry.get_resource_id()
         if resource.get_index().split(".")[0] == chapter and resource_map_entry.is_sim() and labCount < labs:
-            complete_quiz(client, user_id, default_version_id, resource_id)
+            complete_lab(client, user_id, default_version_id, resource_id)
             labCount += 1
     
     for (resource, resource_map_entry) in assments:
