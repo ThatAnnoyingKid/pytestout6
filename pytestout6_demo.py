@@ -94,12 +94,7 @@ for product in classes_response.get_activated_products():
     )
     
     all_sections = outline.get_all_sections()
-    
-    assignment = input("Do you want to do a specific assignment or a chapter? \n A. Specific assignment \n B. Chapter  \n")
-    if assignment.string.lower() == "a":
-        userExam = input("What assignment would you like to do \n ")
-        is_lab = input("Is this a lab or exam? \n A. Lab \n B. Exam \n ") # I would like it to detect if lab or quiz by itself
-        
+         
     chapter = input("What chapter do you want to use? \n")
     labs = int(input("How many labs do you want to do? \n"))
     quiz = int(input("How many quizes do you want to do? \n"))
