@@ -1,7 +1,7 @@
 [![](https://tokei.rs/b1/github.com/ThatAnnoyingKid/pytestout6)](https://github.com/ThatAnnoyingKid/pytestout6)
 
 # pytestout6
-A current prototype for botting Testout
+A current PROTOTYPE for botting Testout
 
 # How to install tqdm
 Open powershell and run "pip install tqdm"
