@@ -4,6 +4,7 @@ import random
 import time
 from tqdm import tqdm
 
+<<<<<<< Updated upstream
 def complete_lab(client, user_id, default_version_id, resource_id):
     create_exam_response = client.create_exam(
         user_id, 
@@ -12,6 +13,17 @@ def complete_lab(client, user_id, default_version_id, resource_id):
     print(resource.get_index())
     exam_session_id = create_exam_response.get_exam_session_id()
     exam_time = random.randrange(300, 600)
+=======
+# def complete_lab(client, user_id, default_version_id, resource_id):
+#    create_exam_response = client.create_exam(
+#        user_id, 
+#        default_version_id,
+#        resource_id
+#    )
+#    print(resource.get_index())
+#    exam_session_id = create_exam_response.get_exam_session_id()
+#    exam_time = random.randrange(300, 600)
+>>>>>>> Stashed changes
     
 def complete_quiz(client, user_id, default_version_id, resource_id):
     create_exam_response = client.create_exam(
@@ -19,7 +31,11 @@ def complete_quiz(client, user_id, default_version_id, resource_id):
         default_version_id,
         resource_id
     )
+<<<<<<< Updated upstream
     print(resource.get_index())    
+=======
+    print(resource.get_index())
+>>>>>>> Stashed changes
     exam_session_id = create_exam_response.get_exam_session_id()
     exam_time = random.randrange(127, 250)
 
@@ -29,7 +45,7 @@ def complete_quiz(client, user_id, default_version_id, resource_id):
         resource_type = 4,
         resource_sub_type = 4,
         group_id = default_version_id,
-        points_scored = random.randrange(8, 10 + 1),
+        points_scored = random.randrange(8, 11),
         points_possible = 10,
         passed = True,
         seconds_in_resource = exam_time,
@@ -119,7 +135,11 @@ for product in classes_response.get_activated_products():
         
         resource_id = resource_map_entry.get_resource_id()
         if resource.get_index().split(".")[0] == chapter and resource_map_entry.is_sim() and labCount < labs:
+<<<<<<< Updated upstream
             complete_lab(client, user_id, default_version_id, resource_id)
+=======
+            complete_quiz(client, user_id, default_version_id, resource_id)  #Labs
+>>>>>>> Stashed changes
             labCount += 1
     
     for (resource, resource_map_entry) in assments:
