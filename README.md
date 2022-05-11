@@ -3,8 +3,11 @@
 # pytestout6
 A current PROTOTYPE for botting Testout
 
-# How to install tqdm
-Open powershell and run "pip install tqdm"
+# Prerequisites
+You need:
+- python
+- tqdm
+- git
 
 # How to Run
 Open powershell in the same directory of these files and simply run "python3 pytestout6_demo.py"
@@ -15,7 +18,6 @@ If you would like to contrubute just make a pull request
 # Current problems
 I am working on fixing these problems:
 
-- Having the program tell you what assignment it is working on
 - Fix the RNG for score so it is not always 100%
 - Allow users start from any specific part
 - Adding in a reset function
